@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Ad</title>
+  <style>
+    body { text-align: center; font-family: Arial, sans-serif; margin-top: 40px; }
+    h2 { color: #333; }
+  </style>
+</head>
+<body>
+  <h2>Watch this ad to earn tokens!</h2>
+  <script src="//libtl.com/sdk.js" data-zone="9657195" data-sdk="show_9657195"></script>
+  <script>
+    // URL orqali kelgan foydalanuvchi ID sini olamiz
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get("user");
+
+    // Reklama ko'rsatish
+    show_9657195().then(() => {
+      fetch("https://your-backend.com/reward", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user: userId, tokens: 10 })
+      })
+      .then(() => {
+        alert("You earned 10 tokens! You can close this window.");
+      });
+    });
+  </script>
+</body>
+</html>
